@@ -37,10 +37,10 @@ for ($i = 1; $i<=$numberOfIngredients; $i++)
         echo "Enter $i ingredient caloricity per 100 g" . PHP_EOL;
         $caloricity = readline(">>");
         
-        if (!is_numeric($caloricity)) {
+        if (!is_numeric($caloricity)||$caloricity>900) {
             echo "Wrong value. Try again" . PHP_EOL;
         }
-    } while (!is_numeric($caloricity));
+    } while (!is_numeric($caloricity)||$caloricity>900);
 
     do {
         echo "Enter $i ingredient weight" . PHP_EOL;
