@@ -1,6 +1,6 @@
 <?php
 echo "Calories counter" . PHP_EOL . "Enter number of ingredients" . PHP_EOL;
-$numberOfIngredients = readline(">>");
+$numberOfIngredients = (int)readline(">>");
 if ($numberOfIngredients < 1 || $numberOfIngredients >10)
 {
     echo "Number of ingredients must be greatar than zero and equal or less than 10" . PHP_EOL;
@@ -8,18 +8,19 @@ if ($numberOfIngredients < 1 || $numberOfIngredients >10)
 else
 {
     $ingredients = getIngredients($numberOfIngredients);
-    echo "Total caloricity is " . calculateTotalCalories($ingredients) . " kilocalories" . PHP_EOL;
+    $totalCalories = calculateTotalCalories($ingredients);
+    echo "Total caloricity is " . $totalCalories . " kilocalories" . PHP_EOL;
     foreach ($ingredients as $ingredient)
     {        
-        $caloriesPercentage = (($ingredient['caloricity'] * $ingredient['weight']/100) / calculateTotalCalories($ingredients)) * 100;
-        $caloriesPercentage= round($caloriesPercentage, 2);
+        $caloriesPercentage = (($ingredient['caloricity'] * $ingredient['weight']/100) / $totalCalories) * 100;
+        $caloriesPercentage= round($caloriesPercentage);
         echo $ingredient['name'] . " " . $ingredient['caloricity'] . " kcal/100g " . ($ingredient['caloricity'] * $ingredient['weight']/100) .  " kcal " . $ingredient['weight'] . " g " . $caloriesPercentage . "% kcal" . PHP_EOL ;
     }
 
 }
 
 function getIngredients($numberOfIngredients){
-
+$ingredients = [];
 for ($i = 1; $i<=$numberOfIngredients; $i++)
 {
     echo "Enter $i ingredient name" . PHP_EOL;
