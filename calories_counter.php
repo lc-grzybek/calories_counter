@@ -11,10 +11,17 @@ else
     $totalCalories = calculateTotalCalories($ingredients);
     echo "Total caloricity is " . $totalCalories . " kilocalories" . PHP_EOL;
     foreach ($ingredients as $ingredient)
-    {        
+    {   
+        [
+            'caloricity' => $caloricity,
+            'weight' => $weight,
+            'name' => $name,
+        ] = $ingredient;
+
         $caloriesPercentage = (($ingredient['caloricity'] * $ingredient['weight']/100) / $totalCalories) * 100;
         $caloriesPercentage= round($caloriesPercentage);
-        echo $ingredient['name'] . " " . $ingredient['caloricity'] . " kcal/100g " . ($ingredient['caloricity'] * $ingredient['weight']/100) .  " kcal " . $ingredient['weight'] . " g " . $caloriesPercentage . "% kcal" . PHP_EOL ;
+        $calc = $ingredient['caloricity'] * $ingredient['weight']/100;
+        echo "$name $caloricity kcal/100g $calc kcal $weight g  $caloriesPercentage % kcal" . PHP_EOL ;
     }
 
 }
@@ -24,11 +31,26 @@ $ingredients = [];
 for ($i = 1; $i<=$numberOfIngredients; $i++)
 {
     echo "Enter $i ingredient name" . PHP_EOL;
-    $ingredientName = (string)readline(">>");    
-    echo "Enter $i ingredient caloricity per 100 g" . PHP_EOL;
-    $caloricity = (int)readline(">>");
-    echo "Enter $i ingredient weight" . PHP_EOL;
-    $weight = (int)readline(">>");
+    $ingredientName = (string)readline(">>"); 
+
+    do {
+        echo "Enter $i ingredient caloricity per 100 g" . PHP_EOL;
+        $caloricity = readline(">>");
+        
+        if (!is_numeric($caloricity)) {
+            echo "Wrong value. Try again" . PHP_EOL;
+        }
+    } while (!is_numeric($caloricity));
+
+    do {
+        echo "Enter $i ingredient weight" . PHP_EOL;
+        $weight = readline(">>");
+        
+        if (!is_numeric($weight)) {
+            echo "Wrong value. Try again" . PHP_EOL;
+        }
+    } while (!is_numeric($weight));
+    
 
     $ingredients[] = [
         'name' => $ingredientName,
