@@ -10,8 +10,9 @@ else
     $ingredients = getIngredients($numberOfIngredients);
     echo "Total caloricity is " . calculateTotalCalories($ingredients) . " kilocalories" . PHP_EOL;
     foreach ($ingredients as $ingredient)
-    {
-        echo $ingredient['name'] . " " . $ingredient['caloricity'] . " kcal/100g " . ($ingredient['caloricity'] * $ingredient['weight']/100) .  " kcal " . $ingredient['weight'] . " g " . PHP_EOL ;
+    {        
+        $caloriesPercentage = (($ingredient['caloricity'] * $ingredient['weight']/100) / calculateTotalCalories($ingredients)) * 100;
+        echo $ingredient['name'] . " " . $ingredient['caloricity'] . " kcal/100g " . ($ingredient['caloricity'] * $ingredient['weight']/100) .  " kcal " . $ingredient['weight'] . " g " . $caloriesPercentage . "% kcal" . PHP_EOL ;
     }
 
 }
@@ -24,7 +25,7 @@ for ($i = 1; $i<=$numberOfIngredients; $i++)
     $ingredientName = (string)readline(">>");    
     echo "Enter $i ingredient caloricity per 100 g" . PHP_EOL;
     $caloricity = (int)readline(">>");
-    echo "Enter $i ingredient weight";
+    echo "Enter $i ingredient weight" . PHP_EOL;
     $weight = (int)readline(">>");
 
     $ingredients[] = [
