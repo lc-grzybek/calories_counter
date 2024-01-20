@@ -12,6 +12,7 @@ else
     foreach ($ingredients as $ingredient)
     {        
         $caloriesPercentage = (($ingredient['caloricity'] * $ingredient['weight']/100) / calculateTotalCalories($ingredients)) * 100;
+        $caloriesPercentage= round($caloriesPercentage, 2);
         echo $ingredient['name'] . " " . $ingredient['caloricity'] . " kcal/100g " . ($ingredient['caloricity'] * $ingredient['weight']/100) .  " kcal " . $ingredient['weight'] . " g " . $caloriesPercentage . "% kcal" . PHP_EOL ;
     }
 
