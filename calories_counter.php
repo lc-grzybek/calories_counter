@@ -20,10 +20,9 @@ if ($numberOfIngredients < 1 || $numberOfIngredients >10)
             'weight' => $weight,
             'name' => $name,
         ] = $ingredient;
-
-        $caloriesPercentage = (($ingredient['caloricity'] * $ingredient['weight']/100) / $totalCalories) * 100;
-        $caloriesPercentage= round($caloriesPercentage);
         $calc = $ingredient['caloricity'] * $ingredient['weight']/100;
+        $caloriesPercentage = ($calc / $totalCalories) * 100;
+        $caloriesPercentage= round($caloriesPercentage);        
         echo "$name $caloricity kcal/100g $calc kcal $weight g  $caloriesPercentage % kcal" . PHP_EOL ;
     }
 
